@@ -8,6 +8,9 @@ const LINE =
 if (LINE.length < 1 || LINE.length > 200) {
   throw new Error(`entry line must be 1-200 chars, got ${LINE.length}`);
 }
+if (LINE !== LINE.trim() || LINE.includes("\n")) {
+  throw new Error("entry line must be a single line with no surrounding whitespace");
+}
 
 mkdirSync("/output", { recursive: true });
 writeFileSync("/output/entry.txt", LINE, "utf8");
